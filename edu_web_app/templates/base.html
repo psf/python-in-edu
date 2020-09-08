@@ -1,0 +1,73 @@
+
+
+{%- extends "bootstrap/base.html" %}
+
+{% block head %}
+{{super()}}
+
+    {% block title %}
+        {% if title %}{{ title }} - Python in Education{% else %}Python in Education{% endif %}
+    {% endblock %}
+
+
+    {% block styles -%}
+    {{super()}}  
+        <link rel="stylesheet" type="text/css"
+          href="{{url_for('static', filename='figuration/css/figuration.css')}}">
+    {% endblock %}
+
+    <meta name=viewport content="width=device-width, initial-scale=1">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/figuration@4.0.1/dist/js/figuration.min.js" integrity="sha384-+JZVAixS16zFmfyjoroVML0weqf3mE1Bg0roQ+k9rZtxdQnyA5OBdKWROMoYw0IL" crossorigin="anonymous"></script>
+{% endblock %}
+
+
+{% block navbar %}
+    {{super()}}  
+   
+    <nav class="navbar navbar-expand-sm navbar-dark flex-between" style="background-color: #1f23a3;">
+  <a href="#" class="navbar-brand"><img src="/static/assets/logo.png" alt="Python in Education logo"></a>
+  <button class="navbar-toggle" type="button" data-cfw="collapse" data-cfw-collapse-target="#navbar0">
+    <span aria-hidden="true">&#8801;</span>
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbar0">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="{{url_for('index')}}" class="nav-link active" aria-current="page">Home</a>
+      </li>
+      <span class="navbar-divider"></span>
+      <li class="nav-item">
+        <a href="/getting_started" class="nav-link">Getting Started</a>
+      </li>
+      <span class="navbar-divider"></span>
+      <li class="nav-item">
+        <a href="/resources" class="nav-link" tabindex="-1" aria-disabled="true">Resources</a>
+      </li>
+      <span class="navbar-divider"></span>
+        <li class="nav-item">
+        <a href="/blog" class="nav-link" tabindex="-1" aria-disabled="true">Blog</a>
+      </li>
+      <span class="navbar-divider"></span>
+        <li class="nav-item">
+        <a href="/connect" class="nav-link" tabindex="-1" aria-disabled="true">Connect</a>
+      </li>
+    </ul>
+    <form class="form-inline ms-auto">
+      <input class="form-control me-0_25" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+       {% block app_content %}{% endblock %}
+{% endblock %}
+s

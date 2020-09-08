@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Welcome to Python in Education!</h1>
+
+    <div class="container">
+    	<p>Are you here as</p>
+        <div class="row">
+           <div class="col">
+           	   <img src="/static/assets/snake_teach.png" alt="a snake at a blackboard" width="200" height="250">
+               An educator?   
+               <div data-cfw="accordion">
+                   <h1><a href="#accordion0" data-cfw="collapse" class="open">Educator</a></h4>
+                   <div id="accordion0" class="collapse">
+                   Customized welcome & site overview
+                   </div>
+               </div>
+           </div>
+           <div class="col">
+           	<img src="/static/assets/snake_comp.png" alt="a snake working on a laptop" width="200" height="250">
+              A learner? 
+              <div data-cfw="accordion">
+                  <h1><a href="#accordion0" data-cfw="collapse" class="open">Learner</a></h4>
+                  <div id="accordion0" class="collapse">
+                   Customized welcome & link to independent learning resources
+                  </div>
+              </div>
+           </div>
+        </div>
+    </div>
+
+    <h2>Other Items</h2>
+    <p>Other items on the home page may include</p>
+    <ul>
+    	<li>A short summary of the Python in Education project and the PSF</li>
+    	<li>A short intro video</li>
+    	<li>Preview of each section of the site</li>
+    	<li> Summary of code of conduct with link to full text</li>
+    	<li>Footer with contact info and site index</li>
+    </ul>
+
+    <p> A note on accessibility: Please note I will be implementing a universal design approach. I have selected a fully customizable CSS framework that was built with accessibility in mind. It is mobile first and includes many elements that are accessible "out of the box." I will also do a full audit on the page to make sure that it is in compliance with WCAG, Section 504, and ARIA standards. I hope that we will have contributors who are able to check AI translations of the site so that it can be offered in as many different languages as possible. </p>
+
+
+
+{% endblock %}
