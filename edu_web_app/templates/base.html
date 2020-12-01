@@ -59,11 +59,37 @@
     <form class="form-inline ms-auto">
       <input class="form-control me-0_25" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-primary" type="submit">Search</button>
+      <span class="navbar-divider"></span>
+        <li class="nav-item">
+        <a href="/login" class="nav-link" tabindex="-1" aria-disabled="true">Login</a>
+      </li>
     </form>
   </div>
 </nav>
 
+
 {% endblock %}
+
+<div>
+  Python in Education: 
+  <a href="{{ url_for('index') }}">Home</a>
+  {% if current_user.is_anonymous %}
+  <a href="{{ url_for('login') }}">Login</a>
+  {% else %}
+  <a href="{{ url_for('logout') }}">Logout</a>
+  {% endif %}
+</div>
+
+<hr>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+  {% for mesage in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
 
 
 {% block content %}
