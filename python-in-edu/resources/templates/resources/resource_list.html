@@ -1,0 +1,11 @@
+{% extends "resources/base.html" %}
+
+{% block content %}
+
+    {% for obj in resource_list %}
+
+        {{ obj.title }}
+
+    {% endfor %}
+
+{% endblock content %}
