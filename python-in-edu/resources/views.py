@@ -4,11 +4,6 @@ from django.views import generic
 from .models import Profile, Resource
 
 
-
-class IndexView(generic.TemplateView):
-    template_name = 'resources/index.html'
-
-
 class ResourceDetailView(generic.DetailView):
     model = Resource
     template_name = 'resources/resource_detail.html'

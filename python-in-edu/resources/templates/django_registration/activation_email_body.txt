@@ -1,0 +1,4 @@
+Thanks for joining Python In Edu!
+
+To activate your account, go here: {{ site }}/accounts/activate/{{ activation_key }}/
+
