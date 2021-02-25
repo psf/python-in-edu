@@ -2,9 +2,11 @@
 
 {% block content %}
 
-    {% for obj in resource_list %}
+    {% for resource in resource_list %}
 
-        {{ obj.title }}
+        <p>
+            <a href="{% url 'resource_detail' resource.pk %}">{{ resource.title }}</a>
+        </p>
 
     {% endfor %}
 

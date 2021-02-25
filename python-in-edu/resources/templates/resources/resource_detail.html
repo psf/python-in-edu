@@ -2,6 +2,52 @@
 
 {% block content %}
 
-resource detail
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ object.title }}</h4>
+                    <h5 class="h6 card-subtitle text-muted">
+                        <a href="http://{{ object.url }}" target="_blank">get the resource</a></h5>
+                    <div class="card-body">
+                        <small>submitted by <a href="{% url 'profile_detail' username=object.submitter.username %}">
+                            {{ object.submitter.username }}</a></small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    {% if object.description %} <p><b>Description</b>: {{ object.description }}</p> {% endif %}
+                    {% if object.attribution %} <p><b>Attribution</b>: {{ object.attribution }}</p> {% endif %}
+                    {% if object.author_bio %} <p><b>Author's Bio</b>: {{ object.author_bio }}</p> {% endif %}
+                    {% if object.organization %} <p><b>Contributing Organization</b>: {{ object.organization }}</p> {% endif %}
+                    {% if object.contact %} <p><b>Contact Info</b>: {{ object.contact}}</p> {% endif %}
+                    {% if object.standards %} <p><b>Standards and Certifications</b>: {{ object.standards}}</p> {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-6">
+                <div class="card">
+                        <ul class="list list-spaced list-divided card-list">
+                            <li class="list-item">type of resource: {{ object.get_resource_type_display }}</li>
+                            <li class="list-item">requires signup? {{ object.requires_signup }}</li>
+                            <li class="list-item">audience: {{ object.get_audience_display }}</li>
+                            <li class="list-item">devices: {{ object.get_devices_display }}</li>
+                            <li class="list-item">language: {{ object.language }}</li>
+                            <li class="list-item">requirements: {{ object.requirements }}</li>
+                        </ul>
+                    </div>
+        </div>
+
+    </div>
+
+</div>
+
 
 {% endblock content %}
