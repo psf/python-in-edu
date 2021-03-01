@@ -2,6 +2,11 @@
 
 {% block content %}
 
+    {% if user.is_authenticated %}
+        <a href="{% url 'resource_create' %}"><button type="button" class="btn mb-2">
+        Add a new resource</button></a>
+    {% endif %}
+
     {% for resource in resource_list %}
 
         <p>

@@ -1,0 +1,39 @@
+<form method="post">{% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    <!-- Required fields -->
+    {% for field in form %}
+        {% if field.field.required %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <!-- Optional fields -->
+
+    <button type="button" onclick="showFields()" class="btn my-1 d-block">
+        Show optional fields</button>
+
+    <span id="optional_fields" style="display: none">
+    {% for field in form %}
+        {% if not field.field.required %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+    </span>
+
+    <input type="submit" class="btn mt-1 d-block" value="Save"  />
+
+</form>

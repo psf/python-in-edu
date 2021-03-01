@@ -35,6 +35,7 @@ class Resource(models.Model):
     devices = models.CharField(max_length=3, choices=choices.DeviceChoices.choices)
     language = models.CharField(max_length=50)
     requirements = models.CharField(max_length=200)
+    license = models.CharField(max_length=200)
 
     # optional fields
     description = models.CharField(max_length=250, blank=True, null=True)

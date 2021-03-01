@@ -28,10 +28,6 @@
                 <a href="{% url 'profile_list' %}" class="nav-link">People</a>
             </li>
             </ul>
-            <form class="form-inline ms-auto">
-                <input class="form-control me-0_25" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn bt-outline-primary" type="submit">Search</button>
-            </form>
         </div>
 
         {% if user.is_authenticated %}

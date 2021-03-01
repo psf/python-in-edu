@@ -15,7 +15,12 @@
                     <div class="card-body">
                         <small>submitted by <a href="{% url 'profile_detail' username=object.submitter.username %}">
                             {{ object.submitter.username }}</a></small>
+                        {% if request.user == object.submitter %}
+                            <a href="{% url 'resource_update' pk=object.pk %}">
+                                <button type="button" class="btn d-block mt-1">Edit this resource</button></a>
+                        {% endif %}
                     </div>
+
                 </div>
             </div>
 
