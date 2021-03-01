@@ -30,3 +30,39 @@ class DeviceChoices(models.TextChoices):
     RASPBERRY_PI = 'RSP', _('Raspberry Pi')
     MICROCONTROLLERS = 'MCC', _('Microcontroller(s)')
     OTHER = 'OTH', _('Other')
+
+
+class UserRoleChoices(models.TextChoices):
+    STUDENT = 'STD', _('Student')
+    PS_EDUCATOR_SCHOOL = 'PES', _('Primary/Secondary Educator (school setting)')
+    PS_EDUCATOR_OO_SCHOOL = 'PEO', _('Primary/Secondary Educator (out of school setting)')
+    TEACHING_FACULTY = 'TF', _('Teaching Faculty (post-secondary)')
+    ADULT_EDU_BOOTCAMP_ETC = 'AEB', _('Adult Educator or Trainer (bootcamp, industry)')
+    ADULT_EDU_COACHING_ETC = 'AEC', _('Adult Educator or Trainer (teacher PD, coaching)')
+    CURRICULUM_DEVELOPER = 'CUR', _('Curriculum or Product Developer')
+    EDUCATION_VOLUNTEER = 'VOL', _('Education Volunteer')
+    RESEARCHER = 'RES', _('Researcher')
+    MENTOR = 'MNT', _('Mentor')
+    INDUSTRY_PROF = 'INP', _('Industry Professional (Tech/Software/CS)')
+    EDUCATION_DEVELOPER = 'EDV', _('Educational program developer')
+    PARENT = 'PRT', _('Parent supporting education')
+    OTHER = 'OTH', _('Other')
+
+
+class PopulationChoices(models.TextChoices):
+    PRIMARY = 'PRI', _('Primary')
+    SECONDAY = 'SEC', _('Secondary ')
+    COLLEGE = 'COL', _('College/University')
+    ADULT = 'ADU', _('Adult/Professional')
+    OTHER = 'OTH', _('Other')
+    NONE = 'NON', _('None')
+
+
+
+
+
+
+
+
+
+

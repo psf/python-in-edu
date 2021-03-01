@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_registration',
     'resources',
     'django.contrib.admin',
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [

@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
+from multiselectfield import MultiSelectField
+
 from . import choices
 
 
@@ -9,7 +11,14 @@ from . import choices
 
 
 class Profile(models.Model):
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    organization = models.CharField(max_length=100, blank=True, null=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
+    roles = MultiSelectField(choices=choices.UserRoleChoices.choices)
+    populations = MultiSelectField(choices=choices.PopulationChoices.choices)
+    underrep = models.BooleanField(default=False)
+    psf_member = models.BooleanField(default=False)
 
 
 def create_user_profile(sender, instance, created, **kwargs):

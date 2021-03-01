@@ -57,6 +57,20 @@ class ProfileDetailView(generic.DetailView):
         return user.profile
 
 
+class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Profile
+    fields = ['organization', 'country', 'roles', 'populations', 'underrep', 'psf_member']
+    template_name = 'resources/profile_update.html'
+
+    def get_object(self, queryset=None):
+        username = self.kwargs.get('username', None)
+        user = get_object_or_404(User, username=username)
+        return user.profile
+
+    def get_success_url(self):
+        return reverse('profile_detail', kwargs={'username': self.request.user.username })
+
+
 class ProfileListView(generic.ListView):
     model = Profile
     template_name = 'resources/profile_list.html'
