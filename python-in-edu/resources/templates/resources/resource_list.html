@@ -1,18 +1,146 @@
-{% extends "resources/base.html" %}
+{% extends "resources/full_width_base.html" %}
 
-{% block content %}
+{% block full_width_content %}
 
     {% if user.is_authenticated %}
         <a href="{% url 'resource_create' %}"><button type="button" class="btn mb-2">
         Add a new resource</button></a>
     {% endif %}
 
-    {% for resource in resource_list %}
+    <table id="resource_list" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Resource Name</th>
+                <th>Submitter</th>
+                <th>Author</th> <!-- Attribution & Author or Org Bio -->
+                <th>Description</th>
+                <th>Language</th>
+                <th>Audience</th>
+                <th>Resource Type</th>
+                <th>Devices</th>
 
-        <p>
-            <a href="{% url 'resource_detail' resource.pk %}">{{ resource.title }}</a>
-        </p>
+                <!-- Hidden columns -->
+                <th>Requires Signup</th>
+                <th>Requirements</th>
+                <th>License</th>
+                <th>Standards</th>
+            </tr>
+        </thead>
+        <tbody>
 
-    {% endfor %}
+            {% for resource in resource_list %}
 
-{% endblock content %}
+                <tr data-child-requirements='{{resource.requirements}}'
+                    data-child-license='{{resource.license}}'
+                    data-child-standards='{{resource.standards}}'
+                    data-child-description='{{resource.description}}'>
+
+                    <td id="{{ forloop.counter }}_toggle"></td>
+                    <td>
+                        <a href="{% url 'resource_detail' resource.pk %}">{{ resource.title }}</a>
+                    </td>
+                    <td><a href="{% url 'profile_detail' resource.submitter.username %}">{{ resource.submitter }}</a></td>
+                    <td>authory stuff</td>
+                    <td><p>{{resource.description|truncatechars:30}}</p></td>
+                    <td>{{ resource.language}}</td>
+                    <td>{{ resource.get_audience_display }}</td>
+                    <td>{{ resource.get_resource_type_display }}</td>
+                    <td>{{ resource.get_devices_display }}</td>
+
+                    <!-- Hidden Columns (displayed as child rows) -->
+                    <td>{{ resource.requires_signup}}</td>
+                    <td>{{ resource.requirements }}</td>
+                    <td>{{ resource.license }}</td>
+                    <td>{{ resource.standards }}</td>
+
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+    <script type="text/javascript">
+
+
+        function format (description, requirements, license, standards) {
+            return '<div>Full Description: ' + description + '<br />' +
+                        'Requirements: ' + requirements + '<br />' +
+                        'License: ' + license + '<br />' +
+                        'Standards: ' + standards + '</div>';
+        }
+
+
+        $(document).ready(function() {
+            var table = $('#resource_list').DataTable( {
+                dom: 'frtipP',
+                "columnDefs": [
+                    {
+                        "targets": [ 9, 10, 11, 12 ],
+                        "visible": false
+                    },
+                    {
+                        searchPanes: {
+                            show: true
+                        },
+                        targets: [5,6,7,8,9]
+                    },
+                    {
+                        searchPanes: {
+                            show: false
+                        },
+                        targets: [0,1,2,3,4,9,10,11,12]
+                    }
+                ],
+                searchPanes: {
+                    controls: false
+                },
+                "columns": [
+                    {
+                        "className":      'details-control',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent": '<i class="bi bi-plus-circle-fill"></i>'
+                    },
+                    { "data": "Resource Name" },
+                    { "data": "Submitter" },
+                    { "data": "Author" },
+                    { "data": "Description" },
+                    { "data": "Language" },
+                    { "data": "Audience" },
+                    { "data": "Resource Type" },
+                    { "data": "Devices" },
+                    { "data": "Requires Signup" },
+                    { "data": "Requirements" },
+                    { "data": "License" },
+                    { "data": "Standards" }
+                ]
+            } );
+
+            // Add event listener for opening and closing details
+            $('#resource_list tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                }
+                else {
+                    // Open this row
+                    row.child(format(tr.data('child-description'), tr.data('child-requirements'),
+                                     tr.data('child-license'),tr.data('child-standards'))).show();
+                }
+
+            } );
+
+        } );
+
+    </script>
+
+
+{% endblock full_width_content %}
+
