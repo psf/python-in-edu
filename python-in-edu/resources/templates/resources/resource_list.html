@@ -7,6 +7,13 @@
         Add a new resource</button></a>
     {% endif %}
 
+    <div>
+    <button id="filter_button" class="btn btn-primary btn-small my-2" type="button"
+        aria-expanded="false" onclick="toggle_filter()">
+        Show filters
+    </button>
+    </div>
+
     <table id="resource_list" class="display" style="width:100%">
         <thead>
             <tr>
@@ -74,9 +81,34 @@
         }
 
 
+        function toggle_filter() {
+            var filter = $("#filter_display")
+            var button = $("#filter_button")
+
+            if (filter.is(":visible")) {
+                button.attr('aria-expanded','false')
+                button.html("Show filters")
+                filter.hide()
+            } else {
+                button.attr('aria-expanded','true')
+                button.html("Hide filters")
+                filter.show()
+            }
+        }
+
+
         $(document).ready(function() {
             var table = $('#resource_list').DataTable( {
-                dom: 'frtipP',
+                // SearchPane options (more in columnDefs)
+                "initComplete": function(settings, json) {
+                    $('.dtsp-panesContainer').attr('id', 'filter_display');
+                    $('.dtsp-panesContainer').hide();
+                },
+                dom: 'Plfrtip',
+                searchPanes: {
+                    controls: false
+                },
+                // other config
                 "columnDefs": [
                     {
                         "targets": [ 9, 10, 11, 12 ],
@@ -95,9 +127,7 @@
                         targets: [0,1,2,3,4,9,10,11,12]
                     }
                 ],
-                searchPanes: {
-                    controls: false
-                },
+
                 "columns": [
                     {
                         "className":      'details-control',
