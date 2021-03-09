@@ -20,6 +20,9 @@ class Profile(models.Model):
     underrep = models.BooleanField(default=False)
     psf_member = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"{self.user.username}"
+
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -36,6 +39,7 @@ class Resource(models.Model):
     title = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
     submitter = models.ForeignKey(User, on_delete=models.CASCADE)  # FIXME: probably want to orphan rather than delete
+    status = models.CharField(max_length=3, choices=choices.ResourceStatusChoices.choices, default=choices.ResourceStatusChoices.PROPOSED)
 
     # required fields
     requires_signup = models.BooleanField(default=False)
@@ -53,3 +57,6 @@ class Resource(models.Model):
     organization = models.CharField(max_length=250, blank=True, null=True)
     contact = models.CharField(max_length=250, blank=True, null=True)
     standards = models.CharField(max_length=250, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.title} (submitted by {self.submitter}) - {self.get_status_display()}"

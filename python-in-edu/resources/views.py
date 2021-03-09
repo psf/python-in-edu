@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 
 
 from .models import Profile, Resource
+from . import choices
 
 
 class ResourceDetailView(generic.DetailView):
@@ -17,6 +18,12 @@ class ResourceDetailView(generic.DetailView):
 class ResourceListView(generic.ListView):
     model = Resource
     template_name = 'resources/resource_list.html'
+
+    def get_context_data(self, **kwargs):
+        # overrides default to get only accepted resources
+        context = super().get_context_data(**kwargs)
+        context['resource_list'] = Resource.objects.filter(status=choices.ResourceStatusChoices.ACCEPTED)
+        return context
 
 
 class ResourceCreateView(LoginRequiredMixin, generic.CreateView):

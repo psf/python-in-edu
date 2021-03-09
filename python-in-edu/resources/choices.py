@@ -2,6 +2,13 @@ from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 
+class ResourceStatusChoices(models.TextChoices):
+    PROPOSED = 'PR', _('Proposed')
+    ACCEPTED = 'AC', _('Accepted')
+    REJECTED = 'RJ', _('Rejected')
+    WITHDRAWN = 'WD', _('Withdrawn')
+
+
 class ResourceTypeChoices(models.TextChoices):
     PLATFORM_APP = 'PA', _('Platform or App')
     CURRICULUM = 'CU', _('Curriculum')
