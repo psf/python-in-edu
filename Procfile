@@ -1,0 +1,1 @@
+web: gunicorn python-in-edu.mysite.wsgi
