@@ -1,1 +1,1 @@
-web: gunicorn python-in-edu.mysite.wsgi
+web: sh -c 'cd python-in-edu && gunicorn mysite.wsgi'

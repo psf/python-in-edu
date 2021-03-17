@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='resource',
             name='resource_type',
-            field=models.CharField(choices=[('PA', 'Platform or App'), ('CU', 'Curriculum'), ('TC', 'Tutorial or Course'), ('BK', 'Book'), ('WE', 'Worked Example'), ('DC', 'Documentation'), ('OT', 'Other')], default='OTH', max_length=2),
+            field=models.CharField(choices=[('PA', 'Platform or App'), ('CU', 'Curriculum'), ('TC', 'Tutorial or Course'), ('BK', 'Book'), ('WE', 'Worked Example'), ('DC', 'Documentation'), ('OT', 'Other')], default='OT', max_length=2),
             preserve_default=False,
         ),
         migrations.AddField(
