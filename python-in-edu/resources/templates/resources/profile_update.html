@@ -11,8 +11,16 @@
 
                         {% for field in form %}
                                 <div class="fieldWrapper">
+
                                     {{ field.errors }}
-                                    {{ field.label_tag }} {{ field }}
+                                    {% if field.name == "underrep" %}
+                                        Do you work primarily with learners from a group underrepresented in the tech industry?
+                                    {% elif field.name == "psf_member" %}
+                                        Are you a member of the Python Software Foundation?
+                                    {% else %}
+                                        {{ field.label_tag }}
+                                    {% endif %}
+                                    {{ field }}
                                     {% if field.help_text %}
                                         <p class="help">{{ field.help_text|safe }}</p>
                                     {% endif %}
