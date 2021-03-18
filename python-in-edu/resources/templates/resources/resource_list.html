@@ -39,6 +39,7 @@
             {% for resource in resource_list %}
 
                 <tr data-child-requirements='{{resource.requirements}}'
+                    data-child-author='{{resource.author_bio}}'
                     data-child-license='{{resource.license}}'
                     data-child-standards='{{resource.standards}}'
                     data-child-description='{{resource.description}}'>
@@ -48,9 +49,9 @@
                         <a href="{% url 'resource_detail' resource.pk %}">{{ resource.title }}</a>
                     </td>
                     <td><a href="{% url 'profile_detail' resource.submitter.username %}">{{ resource.submitter }}</a></td>
-                    <td>authory stuff</td>
-                    <td><p>{{resource.description|truncatechars:30}}</p></td>
-                    <td>{{ resource.language}}</td>
+                    <td>{{ resource.author_bio|truncatechars:10 }} </td>
+                    <td><p>{{ resource.description|truncatechars:30 }}</p></td>
+                    <td>{{ resource.language }}</td>
                     <td>{{ resource.get_audience_display }}</td>
                     <td>{{ resource.get_resource_type_display }}</td>
                     <td>{{ resource.get_devices_display }}</td>
@@ -73,8 +74,9 @@
     <script type="text/javascript">
 
 
-        function format (description, requirements, license, standards) {
+        function format (description, author, requirements, license, standards) {
             return '<div>Full Description: ' + description + '<br />' +
+                        'Full Author Bio: ' + author + '<br />' +
                         'Requirements: ' + requirements + '<br />' +
                         'License: ' + license + '<br />' +
                         'Standards: ' + standards + '</div>';
@@ -161,8 +163,9 @@
                 }
                 else {
                     // Open this row
-                    row.child(format(tr.data('child-description'), tr.data('child-requirements'),
-                                     tr.data('child-license'),tr.data('child-standards'))).show();
+                    row.child(format(tr.data('child-description'), tr.data('child-author'),
+                                     tr.data('child-requirements'),
+                                     tr.data('child-license'), tr.data('child-standards'))).show();
                 }
 
             } );
