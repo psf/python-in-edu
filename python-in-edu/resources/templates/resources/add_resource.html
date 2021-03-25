@@ -35,18 +35,33 @@
 
 <script type="text/javascript">
 
-    var pre_form = document.getElementById('pre_form');
-    var main_form = document.getElementById('main_form');
-    var optional_fields = document.getElementById('optional_fields');
+        var pre_form = document.getElementById('pre_form');
+        var main_form = document.getElementById('main_form');
+        var optional_fields = document.getElementById('optional_fields');
+        var optional_fields_button = document.getElementById('optional_fields_button');
 
-    function showForm(){
+        console.log(optional_fields_button)
+
+    {% if form.errors %}
+
         pre_form.style.display = "none";
         main_form.style.display = "block";
-    }
-
-    function showFields() {
         optional_fields.style.display = "block";
-    }
+        optional_fields_button.style.display = "none";
+
+    {% else %}
+
+        function showForm(){
+            pre_form.style.display = "none";
+            main_form.style.display = "block";
+        }
+
+        function showFields() {
+            optional_fields.style.display = "block";
+            optional_fields_button.style.display = "none";
+        }
+
+    {% endif %}
 
 </script>
 
