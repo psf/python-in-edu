@@ -27,7 +27,7 @@ SECRET_KEY = 'o9ytrr4zhd-m92qt7$mb@3c0bg55s29x#0dje%(w9e^xmy)h-m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['python-in-edu-2.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['python-in-edu.herokuapp.com', '127.0.0.1', 'education.python.org']
 
 
 # Application definition
@@ -220,10 +220,11 @@ LOGIN_URL = 'authorization:login'
 EMAIL_PORT = 1025
 
 
-if 'MAILGUN_SMTP_SERVER' in os.environ:  # running on heroku
+if 'SENDGRID_USERNAME' in os.environ:  # running on heroku
+
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = os.environ.get('MAILGUN_SMTP_SERVER')
-    EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT')
+    EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+    EMAIL_HOST= 'smtp.sendgrid.net'
+    EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN')
-    EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD')
+    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
