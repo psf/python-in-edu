@@ -231,6 +231,8 @@ if 'SENDGRID_USERNAME' in os.environ:  # running on heroku
     EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
     EMAIL_HOST_USER = 'apikey'
 
+    DEFAULT_FROM_EMAIL = "shaunagm@gmail.com"
+
     # EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
     # EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
 
