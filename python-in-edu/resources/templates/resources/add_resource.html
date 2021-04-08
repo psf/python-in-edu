@@ -1,0 +1,69 @@
+{% extends "resources/base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-10">
+
+            <div id="pre_form">
+
+                Before we begin, please confirm that the resource you are submitting is
+                free to use, reproduce and modify, with or without attribution. You will
+                have an opportunity to specify the license of the resource in just a moment.
+
+                <button onclick="showForm()" type="button" class="btn btn-primary mt-1 d-block">
+                        Yes, the resource is free to use, reproduce and modify
+                </button>
+                <a href="{% url 'resource_list' %}"><button type="button" class="btn mt-1">
+                    No, take me back to the resource list</button></a>
+
+            </div>
+
+            <div id="main_form" style="display: none">
+
+                <h5>Tell us about the resource</h5>
+
+                {% include "resources/resource_form.html" %}
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+        var pre_form = document.getElementById('pre_form');
+        var main_form = document.getElementById('main_form');
+        var optional_fields = document.getElementById('optional_fields');
+        var optional_fields_button = document.getElementById('optional_fields_button');
+
+        console.log(optional_fields_button)
+
+    {% if form.errors %}
+
+        pre_form.style.display = "none";
+        main_form.style.display = "block";
+        optional_fields.style.display = "block";
+        optional_fields_button.style.display = "none";
+
+    {% else %}
+
+        function showForm(){
+            pre_form.style.display = "none";
+            main_form.style.display = "block";
+        }
+
+        function showFields() {
+            optional_fields.style.display = "block";
+            optional_fields_button.style.display = "none";
+        }
+
+    {% endif %}
+
+</script>
+
+
+{% endblock content %}

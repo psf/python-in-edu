@@ -1,0 +1,179 @@
+{% extends "resources/full_width_base.html" %}
+
+{% block full_width_content %}
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'resource_create' %}"><button type="button" class="btn">
+        Add a new resource</button></a>
+    {% endif %}
+
+    <div>
+    <button id="filter_button" class="btn btn-primary btn-small my-2" type="button"
+        aria-expanded="false" onclick="toggle_filter()">
+        Show filters
+    </button>
+    </div>
+
+    <table id="resource_list" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Resource Name</th>
+                <th>Submitter</th>
+                <th>Author</th> <!-- Attribution & Author or Org Bio -->
+                <th>Description</th>
+                <th>Language</th>
+                <th>Audience</th>
+                <th>Resource Type</th>
+                <th>Devices</th>
+
+                <!-- Hidden columns -->
+                <th>Requires Signup</th>
+                <th>Requirements</th>
+                <th>License</th>
+                <th>Standards</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for resource in resource_list %}
+
+                <tr data-child-requirements='{{resource.requirements}}'
+                    data-child-author='{{resource.author_bio}}'
+                    data-child-license='{{resource.license}}'
+                    data-child-standards='{{resource.standards}}'
+                    data-child-description='{{resource.description}}'>
+
+                    <td id="{{ forloop.counter }}_toggle"></td>
+                    <td>
+                        <a href="{% url 'resource_detail' resource.pk %}">{{ resource.title }}</a>
+                    </td>
+                    <td><a href="{% url 'profile_detail' resource.submitter.username %}">{{ resource.submitter }}</a></td>
+                    <td>{{ resource.author_bio|truncatechars:10 }} </td>
+                    <td><p>{{ resource.description|truncatechars:30 }}</p></td>
+                    <td>{{ resource.language }}</td>
+                    <td>{{ resource.get_audience_display }}</td>
+                    <td>{{ resource.get_resource_type_display }}</td>
+                    <td>{{ resource.get_devices_display }}</td>
+
+                    <!-- Hidden Columns (displayed as child rows) -->
+                    <td>{{ resource.requires_signup}}</td>
+                    <td>{{ resource.requirements }}</td>
+                    <td>{{ resource.license }}</td>
+                    <td>{{ resource.standards }}</td>
+
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+    <script type="text/javascript">
+
+
+        function format (description, author, requirements, license, standards) {
+            return '<div>Full Description: ' + description + '<br />' +
+                        'Full Author Bio: ' + author + '<br />' +
+                        'Requirements: ' + requirements + '<br />' +
+                        'License: ' + license + '<br />' +
+                        'Standards: ' + standards + '</div>';
+        }
+
+
+        function toggle_filter() {
+            var filter = $("#filter_display")
+            var button = $("#filter_button")
+
+            if (filter.is(":visible")) {
+                button.attr('aria-expanded','false')
+                button.html("Show filters")
+                filter.hide()
+            } else {
+                button.attr('aria-expanded','true')
+                button.html("Hide filters")
+                filter.show()
+            }
+        }
+
+
+        $(document).ready(function() {
+            var table = $('#resource_list').DataTable( {
+                // SearchPane options (more in columnDefs)
+                "initComplete": function(settings, json) {
+                    $('.dtsp-panesContainer').attr('id', 'filter_display');
+                    $('.dtsp-panesContainer').hide();
+                },
+                dom: 'Plfrtip',
+                searchPanes: {
+                    controls: false
+                },
+                // other config
+                "columnDefs": [
+                    {
+                        "targets": [ 9, 10, 11, 12 ],
+                        "visible": false
+                    },
+                    {
+                        searchPanes: {
+                            show: true
+                        },
+                        targets: [5,6,7,8,9]
+                    },
+                    {
+                        searchPanes: {
+                            show: false
+                        },
+                        targets: [0,1,2,3,4,9,10,11,12]
+                    }
+                ],
+
+                "columns": [
+                    {
+                        "className":      'details-control',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent": '<i class="bi bi-plus-circle-fill"></i>'
+                    },
+                    { "data": "Resource Name" },
+                    { "data": "Submitter" },
+                    { "data": "Author" },
+                    { "data": "Description" },
+                    { "data": "Language" },
+                    { "data": "Audience" },
+                    { "data": "Resource Type" },
+                    { "data": "Devices" },
+                    { "data": "Requires Signup" },
+                    { "data": "Requirements" },
+                    { "data": "License" },
+                    { "data": "Standards" }
+                ]
+            } );
+
+            // Add event listener for opening and closing details
+            $('#resource_list tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                }
+                else {
+                    // Open this row
+                    row.child(format(tr.data('child-description'), tr.data('child-author'),
+                                     tr.data('child-requirements'),
+                                     tr.data('child-license'), tr.data('child-standards'))).show();
+                }
+
+            } );
+
+        } );
+
+    </script>
+
+
+{% endblock full_width_content %}
+

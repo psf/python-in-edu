@@ -1,0 +1,24 @@
+{% extends "resources/base.html" %}
+
+{% block content %}
+
+
+<div class="col-2"></div>
+<div class="col-8">
+
+    <h5>Register</h5>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.errors }}
+
+        {{ form }}
+
+        <button type="submit" class="btn btn-info" id="submit_registration">Submit</button>
+    </form>
+
+</div>
+
+
+{% endblock content %}

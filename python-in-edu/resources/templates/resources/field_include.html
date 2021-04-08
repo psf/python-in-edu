@@ -1,0 +1,48 @@
+<div class="fieldWrapper">
+
+
+
+<div class="input-group mb-1">
+
+    {{ field.errors }}
+
+    <!-- Short Input -->
+    {% if field.field.widget.input_type == "text" and field.field.max_length <= 200 %}
+        <span class="input-group-text" id="basic-addon1">{{field.label}}</span>
+        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+            {% if field.field.required %}required{% endif %}
+            {% if field.field.max_length %}maxlength="{{ field.field.max_length }}"{% endif %}
+            {% if field.value %}value="{{field.value}}"{% endif %}
+            name="{{field.name}}" id={{field.id_for_label}}>
+    {% endif %}
+
+    <!-- Text Box -->
+    {% if field.field.widget.input_type == "text" and field.field.max_length > 200 %}
+        <span class="input-group-text">{{field.label}}</span>
+        <textarea class="form-control" aria-label="With textarea"
+        {% if field.field.required %}required{% endif %}
+        {% if field.field.max_length %}maxlength="{{ field.field.max_length }}"{% endif %}
+        {% if field.value %}value="{{field.value}}"{% endif %}
+        name="{{field.name}}" id={{field.id_for_label}}>
+        </textarea>
+    {% endif %}
+
+    <!-- Select -->
+    {% if field.field.widget.input_type == "select" %}
+        <label class="input-group-text" for="{{field.id_for_label}}">{{field.label}}</label>
+        <select class="form-control" name="{{field.name}}" id="{{field.id_for_label}}"
+                                            {% if field.field.required %}required{% endif %}>
+            {% for val, display in field.field.choices %}
+                <option value={{val}} {% if field.value == val %} selected {% endif %}>
+                {{display}}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
+
+    <!-- Checkbox (Figuration doesn't have this as a standalone, weirdly? -->
+    {% if field.field.widget.input_type == "checkbox" %}
+        {{ field.label_tag }} {{ field }}
+    {% endif %}
+
+</div>
+</div>

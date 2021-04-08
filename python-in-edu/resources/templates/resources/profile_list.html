@@ -1,0 +1,14 @@
+{% extends "resources/base.html" %}
+
+{% block content %}
+
+    {% for profile in profile_list %}
+
+        <p>
+            <a href="{% url 'profile_detail' username=profile.user.username %}">{{ profile.user.username }}</a>
+        </p>
+
+    {% endfor %}
+
+
+{% endblock content %}
