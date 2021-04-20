@@ -68,7 +68,7 @@ class Resource(models.Model):
 def resource_updated(sender, instance, created, **kwargs):
 
     if created:
-        staff_emails = [user.email for user in User.objects.all() if user.is_staff() and user.email]
+        staff_emails = [user.email for user in User.objects.all() if user.is_staff and user.email]
         subj = "A new resource has been proposed on Python In Education"
         url = "http://education.python.org" + reverse('admin:resources_resource_change', args=[instance.pk])
         msg = f"A new resource with name {instance.name} has been proposed. Visit to approve: {url}"
