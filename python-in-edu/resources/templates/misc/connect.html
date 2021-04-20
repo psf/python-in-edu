@@ -1,0 +1,48 @@
+{% extends "resources/base.html" %}
+
+{% load static %}
+
+{% block page_title %}Connect With Us{% endblock page_title %}
+
+{% block content %}
+
+<h3 id="python-page-header" class="py-2">Connect With Us</h3>
+
+    <div class="container">
+
+        <div class="row py-4">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <img src="{% static 'images/community.png' %}"></img>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5 pt-3">
+                    <h3>Connect</h3>
+                    {% include 'text_includes/connect_text.html' %}
+            </div>
+        </div>
+
+        <div class="row py-4">
+            <div class="col-sm-5">
+                <h3>Contribute</h3>
+                {% include 'text_includes/contribute_text.html' %}
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6">
+                <img src="{% static 'images/snake_learn.png' %}"></img>
+                <img src="{% static 'images/snake_build.png' %}"></img>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col-sm-12">
+                    <h3>About</h3>
+                    {% include 'text_includes/about_text.html' %}
+            </div>
+        </div>
+
+        <div class="row py-4"></div>
+    </div>
+
+
+{% endblock content %}

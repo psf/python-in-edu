@@ -1,5 +1,8 @@
 {% extends "resources/base.html" %}
 
+{% block page_title %}Resource: {{object.title}}{% endblock page_title %}
+
+
 {% block content %}
 
 <div class="container">
@@ -10,10 +13,8 @@
 
             {% if object.get_status_display != "Accepted" %}
 
-                <div class="alert alert-primary" role="alert">
-                    This resource has status: {{ object.get_status_display }}. Please note that
-                    <strong>no one else</strong> can view this resource besides you, the submitter.
-                    Please contact us if you have questions.
+                <div class="alert alert-yellow" role="alert">
+                    {% include 'text_includes/unpublished_resource_alert.html' with status=object.get_status_display %}
                 </div>
 
             {% endif %}
@@ -22,15 +23,21 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">{{ object.title }}</h4>
-                    <h5 class="h6 card-subtitle text-muted">
-                        <a href="http://{{ object.url }}" target="_blank">get the resource</a></h5>
+                    <h4 class="card-title python-blue">{{ object.title }}</h4>
                     <div class="card-body">
-                        <small>submitted by <a href="{% url 'profile_detail' username=object.submitter.username %}">
-                            {{ object.submitter.username }}</a></small>
+                        <p>
+                            submitted by <a class="python-link"
+                                    href="{% url 'profile_detail' username=object.submitter.username %}">
+                                {{ object.submitter.username }}</a>
+                        </p>
+                        <p>
+                            <a href="http://{{ object.url }}" class="python-link" target="_blank">get the resource</a>
+                        </p>
+
+
                         {% if request.user == object.submitter %}
                             <a href="{% url 'resource_update' pk=object.pk %}">
-                                <button type="button" class="btn d-block mt-1">Edit this resource</button></a>
+                                <button type="button" class="btn d-block mt-1 navbar-btn">Edit this resource</button></a>
                         {% endif %}
                     </div>
 

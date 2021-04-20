@@ -1,21 +1,23 @@
 {% extends "resources/base.html" %}
 
+{% block page_title %}Profile: {{profile.user.username}}{% endblock page_title %}
+
 {% block content %}
 
     <div class="card">
         <div class="card-body">
 
             {% if profile.user.first_name or profile.user.last_name %}
-                <h4 class="card-title">{{ profile.user.first_name }} {{ profile.user.last_name }}
+                <h4 class="card-title python-blue">{{ profile.user.first_name }} {{ profile.user.last_name }}
                     ({{profile.user.username}})
                 </h4>
             {% else %}
-                <h4 class="card-title">{{profile.user.username}}</h4>
+                <h4 class="card-title python-blue">{{profile.user.username}}</h4>
             {% endif %}
 
             {% if profile.user == request.user %}
                 <a href="{% url 'profile_update' username=request.user.username %}">
-                    <button type="button" class="btn d-block my-1">Edit your profile</button></a>
+                    <button type="button" class="btn d-block my-1 navbar-btn">Edit your profile</button></a>
             {% endif %}
 
             {% if profile.country %} <p><b>Country</b>: {{ profile.country }}</p> {% endif %}
@@ -34,12 +36,12 @@
       <div class="card">
             <div class="card-body">
 
-                    <h4 class="card-title">Resources submitted by {{ profile.user.username }}</h4>
+                    <h4 class="card-title python-blue">Resources submitted by {{ profile.user.username }}</h4>
 
                     <ul class="list list-spaced list-divided card-list">
                         {% for resource in profile.user.resource_set.all %}
                         <li class="list-item">
-                            <a href="{% url 'resource_detail' pk=resource.pk %}">
+                            <a href="{% url 'resource_detail' pk=resource.pk %}" class="python-link">
                                 {{ resource.title }}</a></li>
                         {% empty %}
                             <p>This user hasn't submitted any resources yet.</p>

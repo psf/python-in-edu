@@ -1,0 +1,47 @@
+#python-navbar {
+    background-color: #3776ab !important;
+    color: white
+}
+
+#navbarR0 .nav-link {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-btn {
+    border: 0px;
+    background-color: #3776ab !important;
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-btn:hover {
+    color: white;
+}
+
+#python-page-header {
+    color: #3776ab !important;
+    text-align: center;
+}
+
+.python-blue {
+    color: #3776ab !important;
+}
+
+.dot {
+    color: #FFD343 !important;
+}
+
+.text-div {
+    color: black;
+}
+
+.alert-yellow {
+    background-color: #FFD343 !important;
+}
+
+.python-link {
+    color: #3776ab !important;
+    font-weight: bold;
+    text-decoration: none;
+}

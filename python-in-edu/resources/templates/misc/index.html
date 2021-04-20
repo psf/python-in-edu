@@ -1,7 +1,23 @@
 {% extends "resources/base.html" %}
 
+{% load static %}
+
+{% block page_title %}Python in Education{% endblock page_title %}
+
 {% block content %}
 
-hi
+    <h1 id="python-page-header" class="py-2">Python in Education</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 pt-2">
+                {% include 'text_includes/welcome.html' %}
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5">
+                <img src="{% static 'images/snake_teach.png' %}"></img>
+            </div>
+        </div>
+    </div>
 
 {% endblock content %}

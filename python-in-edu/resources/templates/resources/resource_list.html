@@ -1,14 +1,20 @@
 {% extends "resources/full_width_base.html" %}
 
+{% block page_title %}Resources{% endblock page_title %}
+
 {% block full_width_content %}
 
+    <h3 id="python-page-header" class="pt-2">Resources</h3>
+
+    {% include 'text_includes/resource_search_text.html' %}
+
     {% if user.is_authenticated %}
-        <a href="{% url 'resource_create' %}"><button type="button" class="btn">
+        <a href="{% url 'resource_create' %}"><button type="button" class="btn navbar-btn btn-small mt-2">
         Add a new resource</button></a>
     {% endif %}
 
     <div>
-    <button id="filter_button" class="btn btn-primary btn-small my-2" type="button"
+    <button id="filter_button" class="btn btn-small navbar-btn my-2" type="button"
         aria-expanded="false" onclick="toggle_filter()">
         Show filters
     </button>

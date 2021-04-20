@@ -1,5 +1,7 @@
 {% extends "resources/base.html" %}
 
+{% block page_title %}Add Resource{% endblock page_title %}
+
 {% block content %}
 
 <div class="container">
@@ -13,7 +15,7 @@
                 free to use, reproduce and modify, with or without attribution. You will
                 have an opportunity to specify the license of the resource in just a moment.
 
-                <button onclick="showForm()" type="button" class="btn btn-primary mt-1 d-block">
+                <button onclick="showForm()" type="button" class="btn navbar-btn mt-1 d-block">
                         Yes, the resource is free to use, reproduce and modify
                 </button>
                 <a href="{% url 'resource_list' %}"><button type="button" class="btn mt-1">

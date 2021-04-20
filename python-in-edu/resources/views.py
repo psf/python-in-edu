@@ -10,6 +10,18 @@ from .models import Profile, Resource
 from . import choices
 
 
+class GettingStartedView(generic.TemplateView):
+    template_name = 'misc/getting_started.html'
+
+
+class ConnectView(generic.TemplateView):
+    template_name = 'misc/connect.html'
+
+
+class CodeOfConductView(generic.TemplateView):
+    template_name = 'misc/code_of_conduct.html'
+
+
 class ResourceDetailView(generic.DetailView):
     model = Resource
     template_name = 'resources/resource_detail.html'
@@ -76,9 +88,3 @@ class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse('profile_detail', kwargs={'username': self.request.user.username })
-
-
-class ProfileListView(generic.ListView):
-    model = Profile
-    template_name = 'resources/profile_list.html'
-

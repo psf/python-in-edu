@@ -1,0 +1,25 @@
+{% extends "resources/base.html" %}
+
+{% load static %}
+
+{% block page_title %}Getting Started{% endblock page_title %}
+
+
+{% block content %}
+
+    <h3 id="python-page-header" class="py-2">Getting Started</h3>
+
+    <div class="container">
+        <div class="row pt-4">
+            <div class="col-sm-6">
+                <img src="{% static 'images/explore_with_python.png' %}"></img>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5 pt-5">
+                {% include 'text_includes/getting_started_intro_text.html' %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

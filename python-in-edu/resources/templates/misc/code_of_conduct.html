@@ -1,0 +1,15 @@
+{% extends "resources/base.html" %}
+
+{% load static %}
+
+{% block page_title %}Code of Conduct{% endblock page_title %}
+
+{% block content %}
+
+    <h2 class="py-2" id="python-page-header">Code of Conduct</h2>
+
+    <div class="text-div pb-5">
+        {% include 'text_includes/code_of_conduct_text.html' %}
+    </div>
+
+{% endblock content %}
