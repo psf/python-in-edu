@@ -220,6 +220,9 @@ LOGIN_URL = 'authorization:login'
 EMAIL_PORT = 1025
 
 
+DEFAULT_FROM_EMAIL = "shaunagm@gmail.com"   # fix this!!
+
+
 if 'SENDGRID_USERNAME' in os.environ:  # running on heroku
 
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -231,7 +234,7 @@ if 'SENDGRID_USERNAME' in os.environ:  # running on heroku
     EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
     EMAIL_HOST_USER = 'apikey'
 
-    DEFAULT_FROM_EMAIL = "shaunagm@gmail.com"
+
 
     # EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
     # EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
