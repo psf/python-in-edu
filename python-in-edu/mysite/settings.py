@@ -219,7 +219,7 @@ STATICFILES_DIRS = (
 # Django Registration
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 LOGIN_REDIRECT_URL = "/"
-LOGIN_URL = 'authorization:login'
+LOGIN_URL = 'login'
 EMAIL_PORT = 1025
 
 
