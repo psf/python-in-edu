@@ -28,13 +28,14 @@
                 <th>Submitter</th>
                 <th>Author</th> <!-- Attribution & Author or Org Bio -->
                 <th>Description</th>
-                <th>Language</th>
                 <th>Audience</th>
                 <th>Resource Type</th>
                 <th>Devices</th>
 
                 <!-- Hidden columns -->
                 <th>Requires Signup</th>
+                <th>Language</th>
+                <th>Use Type</th>
                 <th>Requirements</th>
                 <th>License</th>
                 <th>Standards</th>
@@ -48,7 +49,8 @@
                     data-child-author='{{resource.author_bio}}'
                     data-child-license='{{resource.license}}'
                     data-child-standards='{{resource.standards}}'
-                    data-child-description='{{resource.description}}'>
+                    data-child-description='{{resource.description}}'
+                    data-child-descriptoin='{{resource.use_type}}'>
 
                     <td id="{{ forloop.counter }}_toggle"></td>
                     <td>
@@ -57,13 +59,15 @@
                     <td><a href="{% url 'profile_detail' resource.submitter.username %}">{{ resource.submitter }}</a></td>
                     <td>{{ resource.author_bio|truncatechars:10 }} </td>
                     <td><p>{{ resource.description|truncatechars:30 }}</p></td>
-                    <td>{{ resource.language }}</td>
+                    
                     <td>{{ resource.get_audience_display }}</td>
                     <td>{{ resource.get_resource_type_display }}</td>
                     <td>{{ resource.get_devices_display }}</td>
 
                     <!-- Hidden Columns (displayed as child rows) -->
                     <td>{{ resource.requires_signup}}</td>
+                    <td>{{ resource.language }}</td>
+                    <td>{{ resource.use_type }}</td>
                     <td>{{ resource.requirements }}</td>
                     <td>{{ resource.license }}</td>
                     <td>{{ resource.standards }}</td>

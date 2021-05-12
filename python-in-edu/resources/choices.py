@@ -65,7 +65,23 @@ class PopulationChoices(models.TextChoices):
     NONE = 'NON', _('None')
 
 
+class UseTypeChoices(models.TextChoices):
+    OPEN_SOURCE_PROJECT = 'OSP', _('Open Source Project - accepts contributions')
+    OPEN_EDUCATION_RESOURCE = 'OER', _('Open Education Resource - ok to distribute and/or revise/remix')
+    FREE_RESOURCE = 'FRE', _('Free Resource - free to use')
+    FREEMIUM = 'IUM', _('Freemium - significant portion of resource free to use')
+    PAID = 'PAI', _('Paid - costs money to access this resource')
+    UNKOWN = 'UNK', _('Bleh')
 
+class PythonChoices(models.TextChoices):
+    PYTHON_SPECIFIC = 'PS', _('Python Specific - part or all of resource is Python specific')
+    LANGUAGE_AGNOSTIC = 'LA', _('Language Agnostic - can be used with any programming language')
+    UNKNOWN = 'UN',_('Unkown')
+    
+class SignUpChoices(models.TextChoices):
+    CREATE_ACCOUNT = 'CA', _('Must create an account')
+    PROVIDE_EMAIL = 'PE', _('Must provide email address')
+    NO_REQUIREMENT = 'NR',_('No sign up requirement')
 
 
 

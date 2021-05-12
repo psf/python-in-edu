@@ -12,14 +12,17 @@
             <div id="pre_form">
 
                 Before we begin, please confirm that the resource you are submitting is
-                free to use, reproduce and modify, with or without attribution. You will
+                free to use, reproduce and/or modify, with or without attribution. You will
                 have an opportunity to specify the license of the resource in just a moment.
 
                 <button onclick="showForm()" type="button" class="btn navbar-btn mt-1 d-block">
-                        Yes, the resource is free to use, reproduce and modify
+                        Yes, the resource is free to use, reproduce and/or modify.
+                </button>
+                <button onclick="showForm()" type="button" class="btn navbar-btn mt-1 d-block">
+                    No, but I want to submit it so that it can be displayed if paid resources are added in the future.
                 </button>
                 <a href="{% url 'resource_list' %}"><button type="button" class="btn mt-1">
-                    No, take me back to the resource list</button></a>
+                    Nevermind, take me back to the resource list</button></a>
 
             </div>
 
@@ -42,7 +45,7 @@
         var optional_fields = document.getElementById('optional_fields');
         var optional_fields_button = document.getElementById('optional_fields_button');
 
-        console.log(optional_fields_button)
+        console.log(optional_fields_button) 
 
     {% if form.errors %}
 
