@@ -40,8 +40,8 @@ class ResourceListView(generic.ListView):
 
 class ResourceCreateView(LoginRequiredMixin, generic.CreateView):
     model = Resource
-    fields = ['title', 'url1', 'url_description1', 'url2', 'url_description2', 'url3', 'url_description2', 'resource_type', 'audience', 'devices', 'requires_signup', 'use_type', 'python_related', 
-    'description3', 'attribution', 'language', 'license', 'contact']
+    fields = ['title', 'url1', 'url_description1', 'url2', 'url_description2', 'url3', 'url_description3', 'resource_type', 'audience', 'devices', 'requires_signup', 'use_type', 'python_related', 
+    'description', 'attribution', 'language', 'license', 'contact']
     template_name = 'resources/add_resource.html'
 
     def get_success_url(self, instance):
