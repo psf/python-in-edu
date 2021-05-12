@@ -25,15 +25,17 @@
                 <div class="card-body">
                     <h4 class="card-title python-blue">{{ object.title }}</h4>
                     <div class="card-body">
-                        <p>
-                            submitted by <a class="python-link"
-                                    href="{% url 'profile_detail' username=object.submitter.username %}">
-                                {{ object.submitter.username }}</a>
-                        </p>
-                        <p>
-                            <a href="{{ object.url }}" class="python-link" target="_blank">get the resource</a>
-                        </p>
 
+                        <p>
+                            <p><a href="{{ object.url1 }}" class="python-link" target="_blank">get the resource</a></p>
+                            {% if object.url_description1 %} <p>{{ object.url_description1 }}</p> {% endif %}
+                            {% if object.url2 %}<p>
+                            <a href="{{ object.url2 }}" class="python-link" target="_blank">get the resource</a></p> {% endif %}
+                            {% if object.url_description2 %} <p>{{ object.url_description2 }}</p> {% endif %}
+                            {% if object.url3 %}<p>
+                            <a href="{{ object.url3 }}" class="python-link" target="_blank">get the resource</a></p> {% endif %}
+                            {% if object.url_description3 %} <p>{{ object.url_description3 }}</p> {% endif %}
+                        </p>
 
                         {% if request.user == object.submitter %}
                             <a href="{% url 'resource_update' pk=object.pk %}">
@@ -46,12 +48,13 @@
 
             <div class="card">
                 <div class="card-body">
-                    {% if object.description %} <p><b>Description</b>: {{ object.description }}</p> {% endif %}
-                    {% if object.attribution %} <p><b>Attribution</b>: {{ object.attribution }}</p> {% endif %}
-                    {% if object.author_bio %} <p><b>Author's Bio</b>: {{ object.author_bio }}</p> {% endif %}
-                    {% if object.organization %} <p><b>Contributing Organization</b>: {{ object.organization }}</p> {% endif %}
-                    {% if object.contact %} <p><b>Contact Info</b>: {{ object.contact}}</p> {% endif %}
-                    {% if object.standards %} <p><b>Standards and Certifications</b>: {{ object.standards}}</p> {% endif %}
+                    <p><b>Description</b>: {{ object.description }}</p> 
+                    <p><b>Created By</b>: {{ object.attribution }}</p>
+                
+                    <p><small>submitted by <a class="python-link"
+                                    href="{% url 'profile_detail' username=object.submitter.username %}">
+                                {{ object.submitter.username }}</a></small></p>
+                        </p>
                 </div>
             </div>
 
@@ -61,12 +64,13 @@
 
             <div class="card">
                 <ul class="list list-spaced list-divided card-list">
-                    <li class="list-item">type of resource: {{ object.get_resource_type_display }}</li>
-                    <li class="list-item">requires signup? {{ object.requires_signup }}</li>
-                    <li class="list-item">audience: {{ object.get_audience_display }}</li>
-                    <li class="list-item">devices: {{ object.get_devices_display }}</li>
-                    <li class="list-item">language: {{ object.language }}</li>
-                    <li class="list-item">requirements: {{ object.requirements }}</li>
+                    <li class="list-item">Type of resource: {{ object.get_resource_type_display }}</li>
+                    <li class="list-item">Audience: {{ object.get_audience_display }}</li>
+                    <li class="list-item">Devices: {{ object.get_devices_display }}</li>
+                    <li class="list-item">Requires signup? {{ object.get_requires_signup_display }}</li>
+                    <li class="list-item">Allowed use: {{ object.get_use_type_display }}</li>
+                    <li class="list-item">Python specific? {{ object.get_python_related_display }}</li>
+                    {% if object.language != None %}<li class="list-item">Language(s) of written material: {{ object.language }}</li>{% endif %}
                 </ul>
             </div>
         </div>

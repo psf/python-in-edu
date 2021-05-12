@@ -40,10 +40,9 @@ class ResourceListView(generic.ListView):
 
 class ResourceCreateView(LoginRequiredMixin, generic.CreateView):
     model = Resource
-    fields = ['title', 'url', 'requires_signup', 'resource_type', 'audience',
-        'devices', 'language', 'requirements', 'description', 'attribution',
-        'author_bio', 'organization', 'contact', 'standards', 'license']
-    template_name = "resources/add_resource.html"
+    fields = ['title', 'url1', 'url_description1', 'url2', 'url_description2', 'url3', 'url_description2', 'resource_type', 'audience', 'devices', 'requires_signup', 'use_type', 'python_related', 
+    'description3', 'attribution', 'language', 'license', 'contact']
+    template_name = 'resources/add_resource.html'
 
     def get_success_url(self, instance):
         return reverse('resource_detail', kwargs={'pk': instance.pk })
@@ -57,9 +56,8 @@ class ResourceCreateView(LoginRequiredMixin, generic.CreateView):
 
 class ResourceUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Resource
-    fields = ['title', 'requires_signup', 'resource_type', 'audience',
-        'devices', 'language', 'requirements', 'description', 'attribution',
-        'author_bio', 'organization', 'contact', 'standards']
+    fields = ['title', 'url1', 'url_description1', 'url2', 'url_description2', 'url3', 'url_description3', 'resource_type', 'audience', 'devices', 'requires_signup', 'use_type', 'python_related', 
+    'description', 'attribution', 'language', 'license', 'contact']
     template_name = 'resources/update_resource.html'
 
     def get_success_url(self):

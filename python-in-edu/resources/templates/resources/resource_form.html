@@ -8,22 +8,25 @@
     {% for field in form %}
         {% if field.field.required %}
             {% include "resources/field_include.html" with field=field %}
-        {% endif %}
+        {% elif not field.field.required %}
+            {% include "resources/field_include.html" with field=field %}
+        {% endif %} 
+
     {% endfor %}
 
     <!-- Optional fields -->
 
-    <button type="button" onclick="showFields()" class="btn my-1" id="optional_fields_button">
-        Show optional fields</button>
+    <!--<button type="button" onclick="showFields()" class="btn my-1" id="optional_fields_button">
+        Show optional fields</button> -->
 
-    <span id="optional_fields" style="display: none">
-        {% for field in form %}
-            {% if not field.field.required %}
-                {% include "resources/field_include.html" with field=field %}
-            {% endif %}
-        {% endfor %}
-    </span>
+<span id="optional_fields" style="display: none">
+    {% for field in form %}
+        {% if not field.field.required %}
+            {% include "resources/field_include.html" with field=field %}
+        {% endif %}
+    {% endfor %} 
+</span> 
 
-    <input type="submit" class="btn mt-1 d-block" value="Save"  />
+<input type="submit" class="btn mt-1 d-block" value="Save"  />
 
 </form>
