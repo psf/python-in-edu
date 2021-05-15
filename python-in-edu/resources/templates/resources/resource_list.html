@@ -59,7 +59,7 @@
                     <td><a href="{% url 'profile_detail' resource.submitter.username %}">{{ resource.submitter }}</a></td>
                     <td>{{ resource.author_bio|truncatechars:10 }} </td>
                     <td><p>{{ resource.description|truncatechars:30 }}</p></td>
-                    
+
                     <td>{{ resource.get_audience_display }}</td>
                     <td>{{ resource.get_resource_type_display }}</td>
                     <td>{{ resource.get_devices_display }}</td>
@@ -84,7 +84,7 @@
     <script type="text/javascript">
 
 
-        function format (description, author, requirements, license, standards) {
+        function format(description, author, requirements, license, standards) {
             return '<div>Full Description: ' + description + '<br />' +
                         'Full Author Bio: ' + author + '<br />' +
                         'Requirements: ' + requirements + '<br />' +
@@ -102,6 +102,7 @@
                 button.html("Show filters")
                 filter.hide()
             } else {
+                
                 button.attr('aria-expanded','true')
                 button.html("Hide filters")
                 filter.show()
@@ -110,18 +111,19 @@
 
 
         $(document).ready(function() {
-            var table = $('#resource_list').DataTable( {
-                // SearchPane options (more in columnDefs)
-                "initComplete": function(settings, json) {
+            $('#resource_list').DataTable( {
+            // SearchPane options (more in columnDefs)
+                  "initComplete": function(settings, json) {
                     $('.dtsp-panesContainer').attr('id', 'filter_display');
                     $('.dtsp-panesContainer').hide();
                 },
+
                 dom: 'Plfrtip',
                 searchPanes: {
                     controls: false
                 },
-                // other config
-                "columnDefs": [
+
+                    "columnDefs": [
                     {
                         "targets": [ 9, 10, 11, 12 ],
                         "visible": false
@@ -140,7 +142,7 @@
                     }
                 ],
 
-                "columns": [
+                    "columns": [
                     {
                         "className":      'details-control',
                         "orderable":      false,
@@ -158,11 +160,15 @@
                     { "data": "Requires Signup" },
                     { "data": "Requirements" },
                     { "data": "License" },
-                    { "data": "Standards" }
+                    { "data": "Standards" },
+                    { "data": "Use Type" }
                 ]
-            } );
 
-            // Add event listener for opening and closing details
+            }
+
+            );
+
+            //TO-DO: Add event listener for opening and closing details
             $('#resource_list tbody').on('click', 'td.details-control', function () {
                 var tr = $(this).closest('tr');
                 var row = table.row( tr );
