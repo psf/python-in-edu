@@ -8,7 +8,7 @@ All contributors must agree to abide by our [Code of Conduct](https://github.com
 
 ## Installation Guide
 
-In order to run this site locally, you'll want to clone this repository and install the requirements (check the [Mac Troubleshooting](#mac-troubleshooting) section if you face any errors):
+In order to run this site locally, you'll want to clone this repository and install the requirements:
 
 ```
 git clone https://github.com/psf/python-in-edu.git
@@ -18,14 +18,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-You can then change directories into the python-in-edu folder and build the database:
-
-```
-python manage.py migrate
-```
-
-
-To run the project locally, run the following command in the terminal:
+You can then change directories into the python-in-edu folder and run the following command in the terminal:
 
 ```
 python manage.py runserver
@@ -50,28 +43,3 @@ If you want to use or test email functionality locally, you'll need to [run a si
 ## Notes
 
 We use the [Spirit project](https://spirit-project.com/) for our forums.
-
----
-
-<h2 id="mac-troubleshooting">Mac Troubleshooting</h2>
-
-### Postgres
-
-If you don't have an installation of Postgres on your system, you might run into the following error:
-
-```
-Error: pg_config executable not found.
-```
-
-[Install Postgres](https://postgresapp.com/) to resolve this issue.
-
-### Pillow
-
-If your Pillow installation fails during installing the requirements with the following message:
-
-```
-The headers or library files could not be found for jpeg,
-a required dependency when compiling Pillow from source.
-```
-
-You can resolve this by installing [jpeg](https://formulae.brew.sh/formula/jpeg) using [homebrew](https://brew.sh/).
