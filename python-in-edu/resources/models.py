@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from multiselectfield import MultiSelectField
 
-from mysite.settings import DEFAULT_FROM_EMAIL
+from mysite.settings import DEFAULT_FROM_EMAIL, SEND_MAIL
 from . import choices
 
 
@@ -83,7 +83,7 @@ class Resource(models.Model):
 
 def resource_updated(sender, instance, created, **kwargs):
 
-    if created:
+    if created and SEND_MAIL:
         staff_emails = [user.email for user in User.objects.all() if user.is_staff and user.email]
         subj = "A new resource has been proposed on Python In Education"
         url = "http://education.python.org" + reverse('admin:resources_resource_change', args=[instance.pk])
