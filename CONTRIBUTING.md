@@ -18,8 +18,8 @@ With all of that in mind, here's how to get started with your contribution!
     - [Prerequisites](#prerequisites)
       - [Optional dependencies](#optional-dependencies)
     - [Project setup](#project-setup)
-      - [1. Forking the repository](#1-forking-the-repository)
-      - [2. Using Git to clone your fork of the repository](#2-using-git-to-clone-your-fork-of-the-repository)
+      - [1. Fork the repository](#1-fork-the-repository)
+      - [2. Use Git to clone your fork of the repository](#2-use-git-to-clone-your-fork-of-the-repository)
       - [3. Create a Python virtual environment for the project](#3-create-a-python-virtual-environment-for-the-project)
       - [4. Install the development dependencies for the project](#4-install-the-development-dependencies-for-the-project)
       - [5. Run migrations & create a Django super user](#5-run-migrations--create-a-django-super-user)
@@ -50,7 +50,7 @@ Now that our [prerequisites](#prerequisites) are installed. We can configure our
 **NOTE:** The following instructions assume very little familiarity with Git, GitHub, and contributing to Python/Django open source projects. If you're already a pro at contributing to open source, feel free to skim our setup instructions and then get to work.
 
 
-#### 1. Forking the repository
+#### 1. Fork the repository
 
 First, [fork the repository](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) so that you have your own copy of the application to work from.
 
@@ -60,7 +60,7 @@ The easiest way to do this is to [click the "Fork" button in the top right hand 
 gh repo fork psf/python-in-edu
 ```
 
-#### 2. Using Git to clone your fork of the repository
+#### 2. Use Git to clone your fork of the repository
 
 Now that your repository has been forked, you'll want to clone that forked version of the repository to your computer using Git. There are two ways to do this.
 
@@ -94,7 +94,7 @@ To do this, we'll use the `venv` module in the Python standard library:
 python -m venv .venv
 ```
 
-This will create a new directory in your local repository named `.venv`. 
+This will create a new directory in your local repository named `.venv`.
 
 We then want to "activate" that virtual environment to ensure that any packages we install are only installed for that project and not for the rest of our computer.
 
