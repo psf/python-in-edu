@@ -96,9 +96,9 @@ python -m venv .venv
 
 This will create a new directory in your local repository named `.venv`.
 
-We then want to "activate" that virtual environment to ensure that any packages we install are only installed for that project and not for the rest of our computer.
+We then need to "activate" that virtual environment to ensure that any packages we install are only installed for that project and not for the rest of our computer.
 
-To do that, run the appropriate activate command for your operating system:
+To do that, run the appropriate "activate" command for your operating system, shown below:
 
 ```shell
 # on macOS and *nix run:
@@ -110,17 +110,15 @@ source .venv/bin/activate
 
 #### 4. Install the development dependencies for the project
 
-We've forked the repository, cloned it, and we're now in a virtual environment. It's now safe to install the project's dependencies using pip.
+We've just forked the repository, cloned it to our computer, and created/activated a Python virtual environment. It's finally safe for us to install the project's dependencies using pip.
 
 The dependencies in this project are broken into requirements files for specific environments. For local development, you only need to install the dependencies declared in the `requirements/dev.txt` requirements file.
 
-If you've never done this before, you can install all the dependencies by running:
+If you've never done this before, you can tell pip to install all of the dependencies listed in a that specific file by running the follwing command from the root directory of the repository:
 
 ```shell
 pip install -r requirements/dev.txt
 ```
-
-From the root of the repository.
 
 #### 5. Run migrations & create a Django super user
 
