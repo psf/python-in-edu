@@ -235,3 +235,5 @@ if 'EMAIL_HOST' in os.environ:  # running on heroku, probably
     DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 else:
     DEFAULT_FROM_EMAIL = "example@example.com"
+
+SEND_MAIL = 'PY_IN_EDU_DONT_SEND_MAIL' not in os.environ
