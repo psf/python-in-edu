@@ -4,6 +4,8 @@ from . import views
 
 
 urlpatterns = [
+    path('authors/new', views.AuthorCreateView.as_view(), name='author_create'),
+    path('authors/list', views.AuthorListView.as_view(), name='author_list'),
     path('profile/<str:username>', views.ProfileDetailView.as_view(), name='profile_detail'),
     path('profile/<str:username>/udpate', views.ProfileUpdateView.as_view(), name='profile_update'),
     path('resource/list', views.ResourceListView.as_view(), name='resource_list'),

@@ -38,7 +38,13 @@ post_save.connect(create_user_profile, sender=User)
 
 #class Link(models.Model):
 
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+    creation_timestamp = models.DateTimeField(auto_now_add=True)
+    update_timestamp = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
 
 class Resource(models.Model):
         #Required and optional fields
@@ -54,7 +60,7 @@ class Resource(models.Model):
 
     # core fields
     title = models.CharField(max_length=200, help_text="What is the name of the resource")
-    submitter = models.ForeignKey(User, on_delete=models.CASCADE)  # FIXME: probably want to orphan rather than delete
+    submitter = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     status = models.CharField(max_length=3, choices=choices.ResourceStatusChoices.choices, default=choices.ResourceStatusChoices.PROPOSED)
 
     # required fields
@@ -63,7 +69,7 @@ class Resource(models.Model):
     audience = MultiSelectField(max_length=30,choices=choices.AudienceChoices.choices, help_text="Select 'not specific' for resources for any or all audiences.")
     devices = MultiSelectField(max_length=30,choices=choices.DeviceChoices.choices, help_text="Which devices are compatible with this resource")
     description = models.CharField(max_length=500, help_text="Add a description of this resource. (max 500 characters)")
-    attribution = models.CharField(max_length=250, help_text="What person or organization created this resource?")
+    author = models.ManyToManyField(Author)
     use_type = models.CharField(max_length=3, choices=choices.UseTypeChoices.choices, help_text="Select the use type that best describes this resource.", default=choices.PythonChoices.UNKNOWN)
     python_related = models.CharField(max_length=2, choices=choices.PythonChoices.choices, help_text="Select the option that best describes this resource.", default=choices.PythonChoices.UNKNOWN)
 
@@ -79,6 +85,8 @@ class Resource(models.Model):
 
     def __str__(self):
         return f"{self.title} (submitted by {self.submitter}) - {self.get_status_display()}"
+
+
 
 
 def resource_updated(sender, instance, created, **kwargs):
