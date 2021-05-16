@@ -9,6 +9,7 @@ All contributors must agree to abide by our [Code of Conduct](https://github.com
 ## Contributing
 
 If you'd like to contribute to this project, see our [Contribution guide](/CONTRIBUTING.md) for detailed instructions on how to help.
+
 ## Notes
 
 We use the [Spirit project](https://spirit-project.com/) for our forums.
