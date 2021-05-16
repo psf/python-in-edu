@@ -42,13 +42,13 @@ post_save.connect(create_user_profile, sender=User)
 
 class Resource(models.Model):
         #Required and optional fields
-    url1 = models.CharField(max_length=200, help_text="You must link at least one resource.")
+    url1 = models.URLField(max_length=200, help_text="You must link at least one resource.")
     url_description1 = models.CharField(max_length=50, blank=True, null=True, help_text="Use this field, if you are including multiple urls")
     # resource = models.ForeignKey('Resource', on_delete=models.CASCADE, related_name='links')
-    url2 = models.CharField(max_length=200, blank=True, null=True, help_text="Optional additional url related to the same resource")
+    url2 = models.URLField(max_length=200, blank=True, null=True, help_text="Optional additional url related to the same resource")
     url_description2 = models.CharField(max_length=50, blank=True, null=True, help_text="Use this field, if you are including multiple urls")
     # resource = models.ForeignKey('Resource', on_delete=models.CASCADE, related_name='links')
-    url3 = models.CharField(max_length=200, blank=True, null=True,  help_text="Optional additional url related to the same resource")
+    url3 = models.URLField(max_length=200, blank=True, null=True,  help_text="Optional additional url related to the same resource")
     url_description3 = models.CharField(max_length=50, blank=True, null=True, help_text="Use this field, if you are including multiple urls")
     # resource = models.ForeignKey('Resource', on_delete=models.CASCADE, related_name='links')
 
