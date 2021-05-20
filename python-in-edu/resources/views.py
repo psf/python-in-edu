@@ -51,7 +51,7 @@ class ResourceListView(generic.ListView):
     def get_context_data(self, **kwargs):
         # overrides default to get only accepted resources
         context = super().get_context_data(**kwargs)
-        context['resource_list'] = Resource.objects.filter(status=choices.ResourceStatusChoices.ACCEPTED)
+        context['resource_list'] = Resource.objects.all()
         return context
 
 

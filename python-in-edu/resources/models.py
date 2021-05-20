@@ -17,12 +17,18 @@ class Organization(models.Model):
     update_timestamp = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f'{self.name}-{self.description}'
+
 
 class ProfileRole(models.Model):
     name = models.CharField(max_length=100)
     active = models.BooleanField(default=True)
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class ProfilePopulation(models.Model):
@@ -31,6 +37,9 @@ class ProfilePopulation(models.Model):
     underrepresented = models.BooleanField(default=False)
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Profile(models.Model):
@@ -56,7 +65,7 @@ post_save.connect(create_user_profile, sender=User)
 
 class Author(models.Model):
     name = models.CharField(max_length=100)
-    biography = models.TextField()
+    biography = models.TextField(blank=True, null=True)
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
 
@@ -70,6 +79,9 @@ class Device(models.Model):
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class ResourceStatus(models.Model):
     name = models.CharField(max_length=50)
@@ -77,6 +89,9 @@ class ResourceStatus(models.Model):
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class SignupChoice(models.Model):
@@ -86,6 +101,9 @@ class SignupChoice(models.Model):
     update_timestamp = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class ResourceType(models.Model):
     name = models.CharField(max_length=50)
@@ -93,6 +111,9 @@ class ResourceType(models.Model):
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class ResourceAudience(models.Model):
@@ -102,6 +123,9 @@ class ResourceAudience(models.Model):
     update_timestamp = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class ResourceUseType(models.Model):
     name = models.CharField(max_length=50)
@@ -110,6 +134,9 @@ class ResourceUseType(models.Model):
     update_timestamp = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class ResourceLanguages(models.Model):
     name = models.CharField(max_length=50)
@@ -117,6 +144,9 @@ class ResourceLanguages(models.Model):
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Resource(models.Model):
@@ -138,7 +168,7 @@ class Resource(models.Model):
 
     # required fields
     requires_signup = models.ForeignKey(SignupChoice, on_delete=models.PROTECT, help_text="Are users required to create an account or provide their email address to access this resource?")
-    resource_types = models.ManyToManyField(ResourceType, on_delete=models.PROTECT, help_text="Select all that apply.", limit_choices_to={'active': True})
+    resource_types = models.ManyToManyField(ResourceType, help_text="Select all that apply.", limit_choices_to={'active': True})
     audience = models.ManyToManyField(ResourceAudience, help_text="Select 'not specific' for resources for any or all audiences.", limit_choices_to={'active': True})
     devices = models.ManyToManyField(Device, help_text="Which devices are compatible with this resource", limit_choices_to={'active': True})
     description = models.CharField(max_length=500, help_text="Add a description of this resource. (max 500 characters)")
@@ -157,7 +187,7 @@ class Resource(models.Model):
     license = models.CharField(max_length=200, blank=True, null=True, help_text="What is the copyright license type? Type 'unknown' if the license type is not available.")
 
     def __str__(self):
-        return f"{self.title} (submitted by {self.submitter}) - {self.get_status_display()}"
+        return f"{self.title} (submitted by {self.submitter}) - {self.status.name}"
 
 
 class ResourceURL(models.Model):
