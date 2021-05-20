@@ -7,7 +7,6 @@ from django.urls import reverse
 from multiselectfield import MultiSelectField
 
 from mysite.settings import DEFAULT_FROM_EMAIL
-from . import choices
 
 # Profile Models
 class Organization(models.Model):

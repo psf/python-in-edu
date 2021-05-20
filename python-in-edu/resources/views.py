@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 
 
 from .models import Profile, Resource, Author
-from . import choices
 
 class GettingStartedView(generic.TemplateView):
     template_name = 'misc/getting_started.html'
