@@ -149,22 +149,11 @@ class ResourceLanguages(models.Model):
 
 
 class Resource(models.Model):
-    # #Required and optional fields
-    # url1 = models.CharField(max_length=200, help_text="You must link at least one resource.")
-    # url_description1 = models.CharField(max_length=50, blank=True, null=True, help_text="Use this field, if you are including multiple urls")
-    # # resource = models.ForeignKey('Resource', on_delete=models.CASCADE, related_name='links')
-    # url2 = models.CharField(max_length=200, blank=True, null=True, help_text="Optional additional url related to the same resource")
-    # url_description2 = models.CharField(max_length=50, blank=True, null=True, help_text="Use this field, if you are including multiple urls")
-    # # resource = models.ForeignKey('Resource', on_delete=models.CASCADE, related_name='links')
-    # url3 = models.CharField(max_length=200, blank=True, null=True,  help_text="Optional additional url related to the same resource")
-    # url_description3 = models.CharField(max_length=50, blank=True, null=True, help_text="Use this field, if you are including multiple urls")
-    # # resource = models.ForeignKey('Resource', on_delete=models.CASCADE, related_name='links')
-
     # core fields
     title = models.CharField(max_length=200, help_text="What is the name of the resource")
     submitter = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     status = models.ForeignKey(ResourceStatus, on_delete=models.PROTECT, default=ResourceStatus.objects.get(sequence=1))
-    
+
     # required fields
     requires_signup = models.ForeignKey(SignupChoice, on_delete=models.PROTECT, help_text="Are users required to create an account or provide their email address to access this resource?")
     resource_types = models.ManyToManyField(ResourceType, help_text="Select all that apply.", limit_choices_to={'active': True})
@@ -177,12 +166,7 @@ class Resource(models.Model):
     # optional fields
     languages = models.ManyToManyField(ResourceLanguages, help_text="Choose the languages that your resource focuses on.", limit_choices_to={'active': True})
 
-    #organization = models.CharField(max_length=250, blank=True, null=True)
     # TODO replace the contact field with contact information against the Profile model
-    # contact = models.CharField(max_length=250, blank=True, null=True, help_text="Not for display, What is the best way to reach you if we have questions about this submission?")
-    #standards = models.CharField(max_length=250, blank=True, null=True)
-    # language = models.CharField(max_length=50, blank=True, null=True, help_text="What language/s are the written materials available in?")
-    #requirements = models.CharField(max_length=200, blank=True, null=True)
     license = models.CharField(max_length=200, blank=True, null=True, help_text="What is the copyright license type? Type 'unknown' if the license type is not available.")
 
     def __str__(self):

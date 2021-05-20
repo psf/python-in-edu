@@ -72,8 +72,8 @@ class ResourceCreateView(LoginRequiredMixin, generic.CreateView):
 
 class ResourceUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Resource
-    fields = ['title', 'url1', 'url_description1', 'url2', 'url_description2', 'url3', 'url_description3', 'resource_type', 'audience', 'devices', 'requires_signup', 'use_type', 'python_related', 
-    'description', 'author', 'language', 'license', 'contact']
+    fields = ['title', 'audience', 'devices', 'requires_signup', 'use_type',
+    'description', 'author', 'license']
     template_name = 'resources/update_resource.html'
 
     def get_success_url(self):
