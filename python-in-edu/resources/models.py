@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.urls import reverse
 
-from multiselectfield import MultiSelectField
-
 from mysite.settings import DEFAULT_FROM_EMAIL
 
 # Profile Models
