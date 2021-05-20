@@ -182,7 +182,7 @@ class Resource(models.Model):
     # TODO replace the contact field with contact information against the Profile model
     # contact = models.CharField(max_length=250, blank=True, null=True, help_text="Not for display, What is the best way to reach you if we have questions about this submission?")
     #standards = models.CharField(max_length=250, blank=True, null=True)
-    language = models.CharField(max_length=50, blank=True, null=True, help_text="What language/s are the written materials available in?")
+    # language = models.CharField(max_length=50, blank=True, null=True, help_text="What language/s are the written materials available in?")
     #requirements = models.CharField(max_length=200, blank=True, null=True)
     license = models.CharField(max_length=200, blank=True, null=True, help_text="What is the copyright license type? Type 'unknown' if the license type is not available.")
 
