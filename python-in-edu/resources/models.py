@@ -6,6 +6,7 @@ from django.urls import reverse
 
 from mysite.settings import DEFAULT_FROM_EMAIL
 
+
 # Profile Models
 class Organization(models.Model):
     name = models.CharField(max_length=50)
@@ -162,8 +163,8 @@ class Resource(models.Model):
     # core fields
     title = models.CharField(max_length=200, help_text="What is the name of the resource")
     submitter = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    status = models.ForeignKey(ResourceStatus, on_delete=models.PROTECT) #TODO Create logic to identify the default status in the ResourceStatus model
-
+    status = models.ForeignKey(ResourceStatus, on_delete=models.PROTECT, default=ResourceStatus.objects.get(sequence=1))
+    
     # required fields
     requires_signup = models.ForeignKey(SignupChoice, on_delete=models.PROTECT, help_text="Are users required to create an account or provide their email address to access this resource?")
     resource_types = models.ManyToManyField(ResourceType, help_text="Select all that apply.", limit_choices_to={'active': True})
