@@ -86,6 +86,7 @@ class ResourceStatus(models.Model):
     creation_timestamp = models.DateTimeField(auto_now_add=True)
     update_timestamp = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+    sequence = models.IntegerField(default=1)
 
     def __str__(self):
         return f'{self.name}'
