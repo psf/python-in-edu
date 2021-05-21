@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from .forms import CreateResourceForm
 
 
 from .models import Profile, Resource, Author
@@ -56,8 +57,7 @@ class ResourceListView(generic.ListView):
 
 class ResourceCreateView(LoginRequiredMixin, generic.CreateView):
     model = Resource
-    fields = ['title', 'url1', 'url_description1', 'url2', 'url_description2', 'url3', 'url_description3', 'resource_type', 'audience', 'devices', 'requires_signup', 'use_type', 'python_related', 
-    'description', 'author', 'language', 'license', 'contact']
+    form_class = CreateResourceForm
     template_name = 'resources/add_resource.html'
 
     def get_success_url(self, instance):
