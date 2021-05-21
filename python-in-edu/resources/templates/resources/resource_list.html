@@ -38,7 +38,6 @@
                 <th>Use Type</th>
                 <th>Requirements</th>
                 <th>License</th>
-                <th>Standards</th>
             </tr>
         </thead>
         <tbody>
@@ -46,7 +45,7 @@
             {% for resource in resource_list %}
 
                 <tr data-child-requirements='{{resource.requirements}}'
-                    data-child-author='{{resource.author_bio}}'
+                    data-child-author='{{resource.author}}'
                     data-child-license='{{resource.license}}'
                     data-child-standards='{{resource.standards}}'
                     data-child-description='{{resource.description}}'
@@ -57,12 +56,28 @@
                         <a href="{% url 'resource_detail' resource.pk %}">{{ resource.title }}</a>
                     </td>
                     <td><a href="{% url 'profile_detail' resource.submitter.username %}">{{ resource.submitter }}</a></td>
-                    <td>{{ resource.author_bio|truncatechars:10 }} </td>
+                    <td>
+                        {% for author in resource.author.all %}
+                            {{ author.name }}
+                        {% endfor %}
+                    </td>
                     <td><p>{{ resource.description|truncatechars:30 }}</p></td>
                     
-                    <td>{{ resource.get_audience_display }}</td>
-                    <td>{{ resource.get_resource_type_display }}</td>
-                    <td>{{ resource.get_devices_display }}</td>
+                    <td>
+                        {% for audience in resource.audience.all %}
+                            {{ audience.name }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for resource_type in resource.resource_types.all %}
+                            {{ resource_type.name }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for device in resource.devices.all %}
+                            {{ device.name }}
+                        {% endfor %}
+                    </td>
 
                     <!-- Hidden Columns (displayed as child rows) -->
                     <td>{{ resource.requires_signup}}</td>
@@ -70,7 +85,6 @@
                     <td>{{ resource.use_type }}</td>
                     <td>{{ resource.requirements }}</td>
                     <td>{{ resource.license }}</td>
-                    <td>{{ resource.standards }}</td>
 
                 </tr>
 
