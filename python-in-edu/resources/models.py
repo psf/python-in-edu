@@ -7,6 +7,9 @@ from django.urls import reverse
 from mysite.settings import DEFAULT_FROM_EMAIL
 
 
+def get_initial_status():
+    return ResourceStatus.objects.get(sequence=1).id
+
 # Profile Models
 class Organization(models.Model):
     name = models.CharField(max_length=50)
@@ -137,7 +140,7 @@ class ResourceUseType(models.Model):
         return f'{self.name}'
 
 
-class ResourceLanguages(models.Model):
+class ResourceLanguage(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
     creation_timestamp = models.DateTimeField(auto_now_add=True)
@@ -152,7 +155,7 @@ class Resource(models.Model):
     # core fields
     title = models.CharField(max_length=200, help_text="What is the name of the resource")
     submitter = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    status = models.ForeignKey(ResourceStatus, on_delete=models.PROTECT, default=ResourceStatus.objects.get(sequence=1))
+    status = models.ForeignKey(ResourceStatus, on_delete=models.PROTECT, default=get_initial_status())
 
     # required fields
     requires_signup = models.ForeignKey(SignupChoice, on_delete=models.PROTECT, help_text="Are users required to create an account or provide their email address to access this resource?")
@@ -164,7 +167,7 @@ class Resource(models.Model):
     use_type = models.ManyToManyField(ResourceUseType, help_text="Select the use type that best describes this resource.", limit_choices_to={'active': True})
 
     # optional fields
-    languages = models.ManyToManyField(ResourceLanguages, help_text="Choose the languages that your resource focuses on.", limit_choices_to={'active': True})
+    languages = models.ManyToManyField(ResourceLanguage, help_text="Choose the languages that your resource focuses on.", limit_choices_to={'active': True})
 
     # TODO replace the contact field with contact information against the Profile model
     license = models.CharField(max_length=200, blank=True, null=True, help_text="What is the copyright license type? Type 'unknown' if the license type is not available.")
