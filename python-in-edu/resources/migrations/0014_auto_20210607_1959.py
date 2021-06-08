@@ -94,7 +94,7 @@ def load_resource_use_types(apps, schema_editor):
     ResourceUseType.objects.get_or_create(pk=3, name='Free Resource',
                                           description='Free Resource - Free to use', active=True)
     ResourceUseType.objects.get_or_create(pk=4, name='Freemium',
-                                          description='Freemium - significant portion of resource free to use.', active=True)
+                                          description='Freemium - significant portion of resource free to use', active=True)
     ResourceUseType.objects.get_or_create(pk=5, name='Paid',
                                           description='Paid - costs money to access this resource', active=True)
 

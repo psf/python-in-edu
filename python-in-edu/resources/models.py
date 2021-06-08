@@ -11,7 +11,7 @@ def get_initial_status():
     initial_status = ResourceStatus.objects.get(sequence=1).id
     if initial_status:
         return initial_status
-        
+
     return None
 
 # Profile Models
@@ -159,7 +159,7 @@ class Resource(models.Model):
     # core fields
     title = models.CharField(max_length=200, help_text="What is the name of the resource")
     submitter = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    status = models.ForeignKey(ResourceStatus, on_delete=models.PROTECT, default=get_initial_status())
+    status = models.ForeignKey(ResourceStatus, on_delete=models.PROTECT, default=get_initial_status(), blank=True, null=True)
 
     # required fields
     requires_signup = models.ForeignKey(SignupChoice, on_delete=models.PROTECT, help_text="Are users required to create an account or provide their email address to access this resource?")
