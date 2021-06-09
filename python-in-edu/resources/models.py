@@ -8,11 +8,11 @@ from mysite.settings import DEFAULT_FROM_EMAIL
 
 
 def get_initial_status():
-    initial_status = ResourceStatus.objects.get(sequence=1).id
-    if initial_status:
-        return initial_status
-
-    return None
+    try:
+        initial_status = ResourceStatus.objects.get(sequence=1).id
+    except ResourceStatus.DoesNotExist:
+        initial_status = None
+    return initial_status
 
 # Profile Models
 class Organization(models.Model):
