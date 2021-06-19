@@ -4,11 +4,10 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from .forms import CreateResourceForm
 
 
-from .models import Profile, Resource
-from . import choices
-
+from .models import Profile, Resource, Author
 
 class GettingStartedView(generic.TemplateView):
     template_name = 'misc/getting_started.html'
@@ -20,6 +19,24 @@ class ConnectView(generic.TemplateView):
 
 class CodeOfConductView(generic.TemplateView):
     template_name = 'misc/code_of_conduct.html'
+
+
+class AuthorListView(generic.ListView):
+    model = Author
+    template_name = 'authors/author_list.html'
+
+
+class AuthorCreateView(generic.CreateView):
+    model = Author
+    fields = '__all__'
+    template_name = 'authors/author_create.html'
+
+    def get_success_url(self, instance):
+        return reverse('author_list')
+
+    def form_valid(self, form):
+        instance = form.save()
+        return HttpResponseRedirect(self.get_success_url(instance=instance))
 
 
 class ResourceDetailView(generic.DetailView):
@@ -34,14 +51,13 @@ class ResourceListView(generic.ListView):
     def get_context_data(self, **kwargs):
         # overrides default to get only accepted resources
         context = super().get_context_data(**kwargs)
-        context['resource_list'] = Resource.objects.filter(status=choices.ResourceStatusChoices.ACCEPTED)
+        context['resource_list'] = Resource.objects.all()
         return context
 
 
 class ResourceCreateView(LoginRequiredMixin, generic.CreateView):
     model = Resource
-    fields = ['title', 'url1', 'url_description1', 'url2', 'url_description2', 'url3', 'url_description3', 'resource_type', 'audience', 'devices', 'requires_signup', 'use_type', 'python_related', 
-    'description', 'attribution', 'language', 'license', 'contact']
+    form_class = CreateResourceForm
     template_name = 'resources/add_resource.html'
 
     def get_success_url(self, instance):
@@ -56,8 +72,8 @@ class ResourceCreateView(LoginRequiredMixin, generic.CreateView):
 
 class ResourceUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Resource
-    fields = ['title', 'url1', 'url_description1', 'url2', 'url_description2', 'url3', 'url_description3', 'resource_type', 'audience', 'devices', 'requires_signup', 'use_type', 'python_related', 
-    'description', 'attribution', 'language', 'license', 'contact']
+    fields = ['title', 'audience', 'devices', 'requires_signup', 'use_type',
+    'description', 'author', 'license']
     template_name = 'resources/update_resource.html'
 
     def get_success_url(self):

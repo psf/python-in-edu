@@ -1,97 +1,45 @@
-{% extends "resources/full_width_base.html" %}
+{% extends "resources/base.html" %}
 
 {% block page_title %}Resources{% endblock page_title %}
 
 {% block full_width_content %}
 
-    <h3 id="python-page-header" class="pt-2">Resources</h3>
+    <h3 id="python-page-header" class="pt-2">Authors</h3>
 
-    {% include 'text_includes/resource_search_text.html' %}
+    {% include 'text_includes/author_search_text.html' %}
 
     {% if user.is_authenticated %}
-        <a href="{% url 'resource_create' %}"><button type="button" class="btn navbar-btn btn-small mt-2">
-        Add a new resource</button></a>
+
+        <a href="{% url 'author_create' %}">
+            <button type="button" class="btn navbar-btn btn-small mt-2">
+                Add a new Author
+            </button>
+        </a>
+
     {% endif %}
-
-    <div>
-    <button id="filter_button" class="btn btn-small navbar-btn my-2" type="button"
-        aria-expanded="false" onclick="toggle_filter()">
-        Show filters
-    </button>
-    </div>
-
-    <table id="resource_list" class="display" style="width:100%">
+<div>
+    <table id="author_list" class="display" style="width:100%">
         <thead>
             <tr>
-                <th></th>
-                <th>Resource Name</th>
-                <th>Submitter</th>
-                <th>Author</th> <!-- Attribution & Author or Org Bio -->
-                <th>Description</th>
-                <th>Audience</th>
-                <th>Resource Type</th>
-                <th>Devices</th>
-
-                <!-- Hidden columns -->
-                <th>Requires Signup</th>
-                <th>Language</th>
-                <th>Use Type</th>
-                <th>Requirements</th>
-                <th>License</th>
+                <th>Author Name</th>
             </tr>
         </thead>
         <tbody>
 
-            {% for resource in resource_list %}
+            {% for author in author_list %}
 
-                <tr data-child-requirements='{{resource.requirements}}'
-                    data-child-author='{{resource.author}}'
-                    data-child-license='{{resource.license}}'
-                    data-child-standards='{{resource.standards}}'
-                    data-child-description='{{resource.description}}'
-                    data-child-descriptoin='{{resource.use_type}}'>
-
-                    <td id="{{ forloop.counter }}_toggle"></td>
+                <tr>
                     <td>
-                        <a href="{% url 'resource_detail' resource.pk %}">{{ resource.title }}</a>
+                        <a href="">{{ author.name }}</a>
                     </td>
-                    <td><a href="{% url 'profile_detail' resource.submitter.username %}">{{ resource.submitter }}</a></td>
-                    <td>
-                        {% for author in resource.author.all %}
-                            {{ author.name }}
-                        {% endfor %}
-                    </td>
-                    <td><p>{{ resource.description|truncatechars:30 }}</p></td>
-                    
-                    <td>
-                        {% for audience in resource.audience.all %}
-                            {{ audience.name }}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for resource_type in resource.resource_types.all %}
-                            {{ resource_type.name }}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for device in resource.devices.all %}
-                            {{ device.name }}
-                        {% endfor %}
-                    </td>
-
-                    <!-- Hidden Columns (displayed as child rows) -->
-                    <td>{{ resource.requires_signup}}</td>
-                    <td>{{ resource.language }}</td>
-                    <td>{{ resource.use_type }}</td>
-                    <td>{{ resource.requirements }}</td>
-                    <td>{{ resource.license }}</td>
-
                 </tr>
 
             {% endfor %}
 
         </tbody>
     </table>
+</div>
+
 
 
 
