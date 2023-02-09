@@ -28,7 +28,8 @@ else:
     SECRET_KEY = 'o9ytrr4zhd-m92qt7$mb@3c0bg55s29x#0dje%(w9e^xmy)h-m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.getenv('DEBUG'):
+    DEBUG = True
 
 ALLOWED_HOSTS = ['python-in-edu.herokuapp.com', '127.0.0.1', 'education.python.org']
 
