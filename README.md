@@ -15,7 +15,7 @@ git clone https://github.com/psf/python-in-edu.git
 cd python-in-edu
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements/dev.txt
 ```
 
 You can then change directories into the python-in-edu folder and build the database:
