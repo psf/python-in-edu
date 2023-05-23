@@ -78,6 +78,10 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'spirit.user.auth.backends.UsernameAuthBackend',
+    'spirit.user.auth.backends.EmailAuthBackend',
+]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
