@@ -47,38 +47,6 @@ INSTALLED_APPS = [
     'resources',
     'django.contrib.admin',
     'multiselectfield',
-
-    # spirit forum apps
-    'spirit.core',
-    'spirit.admin',
-    'spirit.search',
-
-    'spirit.user',
-    'spirit.user.admin',
-    'spirit.user.auth',
-
-    'spirit.category',
-    'spirit.category.admin',
-
-    'spirit.topic',
-    'spirit.topic.admin',
-    'spirit.topic.favorite',
-    'spirit.topic.moderate',
-    'spirit.topic.notification',
-    'spirit.topic.private',
-    'spirit.topic.unread',
-
-    'spirit.comment',
-    'spirit.comment.bookmark',
-    'spirit.comment.flag',
-    'spirit.comment.flag.admin',
-    'spirit.comment.history',
-    'spirit.comment.like',
-    'spirit.comment.poll',
-
-    'djconfig',
-    'haystack',
-    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -90,14 +58,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-
-    # 'spirit.core.middleware.XForwardedForMiddleware',
-    'spirit.user.middleware.TimezoneMiddleware',
-    'spirit.user.middleware.LastIPMiddleware',
-    'spirit.user.middleware.LastSeenMiddleware',
-    'spirit.user.middleware.ActiveUserMiddleware',
-    'spirit.core.middleware.PrivateForumMiddleware',
-    'djconfig.middleware.DjConfigMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -113,46 +73,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                # added for spirit
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.media',
-                'django.template.context_processors.static',
-                'django.template.context_processors.tz',
-                'djconfig.context_processors.config',
             ],
         },
     },
 ]
 
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'spirit_cache',
-    },
-    'st_rate_limit': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'spirit_rl_cache',
-        'TIMEOUT': None
-    }
-}
-
-
 AUTHENTICATION_BACKENDS = [
     'spirit.user.auth.backends.UsernameAuthBackend',
     'spirit.user.auth.backends.EmailAuthBackend',
 ]
-
-ST_SITE_URL = 'http://127.0.0.1:8000/'
-
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(BASE_DIR, 'st_search'),
-    },
-}
-HAYSTACK_SIGNAL_PROCESSOR = 'spirit.search.signals.RealtimeSignalProcessor'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -223,7 +152,7 @@ STATICFILES_DIRS = (
 # Django Registration
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 LOGIN_REDIRECT_URL = "/"
-LOGIN_URL = 'login'
+LOGIN_URL = "login"
 EMAIL_PORT = 1025
 
 

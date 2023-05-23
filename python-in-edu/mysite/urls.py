@@ -25,7 +25,7 @@ urlpatterns = [
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include(('django.contrib.auth.urls'))),
     path('resources/', include('resources.urls')),
-    path('forum/', include('spirit.urls',"forum")),
     path('admin/', admin.site.urls),
+    path('forum/', RedirectView.as_view(url="https://discuss.python.org/c/education/31")),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('favicon.ico')))
 ]
