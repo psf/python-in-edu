@@ -2,7 +2,7 @@
 
 ## Join the Community
 
-We welcome contributions to this project! Our [issue tracker](https://github.com/psf/python-in-edu/issues) has open bugs, feature requests, etc. We encourage you to introduce yourself to the community [in our forums](https://discuss.python.org/) before leaping into action.
+We welcome contributions to this project! Our [issue tracker](https://github.com/psf/python-in-edu/issues) has open bugs, feature requests, etc. We encourage you to introduce yourself to the community [in our forums](https://discuss.python.org/c/education/31) before leaping into action.
 
 All contributors must agree to abide by our [Code of Conduct](https://github.com/psf/python-in-edu/blob/master/code_of_conduct.md).
 
