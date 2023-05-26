@@ -13,18 +13,17 @@
             {% if field.field.required %}required{% endif %}
             {% if field.field.max_length %}maxlength="{{ field.field.max_length }}"{% endif %}
             {% if field.value %}value="{{field.value}}"{% endif %}
-            name="{{field.name}}" id={{field.id_for_label}}>
+            name="{{field.name}}" id={{field.id_for_label}} placeholder="{{field.help_text}}">
     {% endif %}
 
     <!-- Text Box -->
     {% if field.field.widget.input_type == "text" and field.field.max_length > 200 %}
         <span class="input-group-text">{{field.label}}</span>
-        <textarea class="form-control" aria-label="With textarea"
+        <textarea class="form-control" aria-label="With textarea" placeholder="{{field.help_text}}"
         {% if field.field.required %}required{% endif %}
         {% if field.field.max_length %}maxlength="{{ field.field.max_length }}"{% endif %}
         {% if field.value %}value="{{field.value}}"{% endif %}
-        name="{{field.name}}" id={{field.id_for_label}}>
-        </textarea>
+        name="{{field.name}}" id={{field.id_for_label}}></textarea>
     {% endif %}
 
     <!-- Select -->
@@ -32,6 +31,7 @@
         <label class="input-group-text" for="{{field.id_for_label}}">{{field.label}}</label>
         <select class="form-control" name="{{field.name}}" id="{{field.id_for_label}}"
                                             {% if field.field.required %}required{% endif %}>
+                                            <option value="" disabled selected>{{field.help_text}}</option>
             {% for val, display in field.field.choices %}
                 <option value={{val}} {% if field.value == val %} selected {% endif %}>
                 {{display}}</option>
