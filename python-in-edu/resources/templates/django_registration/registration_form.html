@@ -6,7 +6,7 @@
 <div class="col-2"></div>
 <div class="col-8">
 
-    <h5>Register</h5>
+    <h3>Register</h3>
 
     <form method="post">
         {% csrf_token %}
@@ -14,15 +14,13 @@
         {% for field in form %}
         <p>
             {% if field.errors %}
-            <ul>
-                <h6 style="color:red;">
-                    {% for error in field.errors %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                </h6>
-            </ul>
+            <h6 style="color:red;">
+                {% for error in field.errors %}
+                {{ error }}
+                {% endfor %}
+            </h6>
             {% endif %}
-            {{ field.label_tag }} {{ field }}
+            {{ field|as_crispy_field }}
         </p>
         {% endfor %}
 
