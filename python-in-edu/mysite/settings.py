@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'resources',
     'django.contrib.admin',
     'multiselectfield',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
